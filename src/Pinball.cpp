@@ -528,7 +528,7 @@ MenuItem* createMenus(Engine * engine) {
   menucfg->addMenuItem(menuaudio);
 
   MenuSub* menukey = new MenuSub("keyboard", engine);
-  menukey->setBottomText("shorcuts for view change F5-F8");
+  menukey->setBottomText("shortcuts for view change F5-F8");
   menucfg->addMenuItem(menukey);
 
   string filename = string(Config::getInstance()->getDataSubDir()) + "/splash.png";
