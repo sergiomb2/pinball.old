@@ -426,7 +426,7 @@ void Config::setPaths(char const * const argv0) {
   m_sExeDir = "./";
   if ( *( m_sDataDir.c_str() ) != '/' ) {
     const char* ptr=0;
-    char* ptrw = 0;
+    const char* ptrw = 0;
     //cout<<"relative to exe file"<<endl;
     ptr = (strrchr(argv0,'/')); // unix /cygwin / check win32 
 #ifdef WIN32

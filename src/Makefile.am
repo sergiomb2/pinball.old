@@ -3,15 +3,13 @@ AUTOMAKE_OPTIONS = gnu
 pinlibdir = $(libdir)/pinball
 pinincludedir = $(includedir)/pinball
 
-pinlib_LIBRARIES = libemilia_pin.a
-
 bin_PROGRAMS = pinball
 
-INCLUDES = -I../base -I../addon
+pinlib_LIBRARIES = libemilia_pin.a
 
-pinball_LDADD = \
- libemilia_pin.a ../addon/libemilia_addon.a ../base/libemilia_base.a -lltdl
+INCLUDES = -I../base -I../addon @INCLTDL@
 
+pinball_LDADD = ../src/libemilia_pin.a ../addon/libemilia_addon.a ../base/libemilia_base.a @LIBLTDL@
 pinball_LDFLAGS = -export-dynamic
 
 pinball_SOURCES = Pinball.cpp
@@ -31,7 +29,6 @@ Script.cpp \
 StateBehavior.cpp \
 Table.cpp
 
-dnl libemilia_pin_la_SOURCES = $(libemilia_pin_a_SOURCES)
 
 pininclude_HEADERS = \
 ArmBehavior.h \
@@ -51,7 +48,7 @@ SrcTest.h \
 StateBehavior.h \
 Table.h
 
-#~rzr:{ : This trick workaround a bad generated rule (under Linux mingw32)
+# !+rzr : This trick workaround a bad generated rule (under Linux mingw32)
 # src/ litool returns:  -L/usr/local//lib /usr/lib/libjpeg.so
 # make -C src  wpinball.exe (build the final programm)
 # Pinball.o \
@@ -64,4 +61,4 @@ wpinball.exe:  ${pinball_OBJECTS} ${pinball_DEPENDENCIES}
  -lwinmm -luser32 -lgdi32 -ldxguid   \
  -lmingw32 -lSDLmain -lSDL  -mwindows \
  -L${GCCLOCALDIR}../lib
-#~rzr:} # have to solve it later # -lstdc++
+# !-rzr : # have to solve it later # -lstdc++

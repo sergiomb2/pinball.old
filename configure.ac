@@ -1,47 +1,27 @@
-dnl #                                               -*- Autoconf -*-
-dnl # Process this file with autoconf 2.53 to produce a configure script.
+dnl Process this file with autoconf 2.53 to produce a configure script.
+
 dnl init autoconf and automake
-AC_INIT(pinball, 0.0.0, [[pinball.sf.net]])
+AC_INIT(pinball, 0.3.2, [[pinball.sf.net]])
 
-AC_CONFIG_HEADERS(pinconfig.h)
-AM_CONFIG_HEADER(config.h)
-
-AC_CONFIG_AUX_DIR([libltdl/config])
+AM_CONFIG_HEADER(pinconfig.h)
 
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AM_INIT_AUTOMAKE(pinball, 0.0.0, [[pinball.sf.net]])
-
-dnl # Checks for programs.
-AC_PROG_CXX
-AC_PROG_CC
-AC_PROG_INSTALL
-AC_PROG_LIBTOOL
-
+AM_INIT_AUTOMAKE
 
 dnl this is a c++ program
-dnl CFLAGS="-g -W -Wall -O2"
-dnl CXXFLAGS="-g -W -Wall -O2"
+CFLAGS="-g -W -Wall -O2"
+CXXFLAGS="-g -W -Wall -O2"
 
-AC_ARG_WITH(cflags,
-[  --with-cflags=CFLAGS            use CFLAGS as compile time arguments.],
-    [CFLAGS=$with_cflags; export CFLAGS])
-
-AC_ARG_WITH(cxxflags,
-[  --with-cxxflags=CXXFLAGS        use CXXFLAGS as compile time arguments.],
-    [CXXFLAGS=$with_cxxflags; export CXXFLAGS])
-
+dnl Checks for programs.
+AC_PROG_CC
+AC_PROG_CXX
+AC_PROG_INSTALL
 AC_LIBTOOL_DLOPEN
-LT_CONFIG_LTDL_DIR([libltdl])
-LT_INIT
-LTDL_INIT
-
-
-AC_CONFIG_MACRO_DIR([libltdl/m4])
-
-AC_SUBST(INCLTDL)
-AC_SUBST(LIBLTDL)
+AC_LIBLTDL_CONVENIENCE
+AC_PROG_LIBTOOL
+AC_WITH_LTDL
 
 dnl *******************************************
 dnl PATHS AND DIRS ****************************
@@ -264,11 +244,9 @@ AC_DEFINE(EM_USE_SHARED_COLOR, [1], [One color per vertex])
 dnl AC_SUBST(pkglibdir)
 dnl AC_SUBST(pkgincludedir)
 
-AC_CONFIG_FILES([Makefile
- addon/Makefile base/Makefile data/Makefile
- data/tux/Makefile data/professor/Makefile
- data/hurd/Makefile
- data/gnu/Makefile
- src/Makefile test/Makefile pinball-config])
+AC_CONFIG_FILES([Makefile addon/Makefile base/Makefile data/Makefile
+ src/Makefile test/Makefile pinball-config
+ data/tux/Makefile data/professor/Makefile data/hurd/Makefile data/gnu/Makefile
+])
 
 AC_OUTPUT

@@ -439,7 +439,7 @@ void get_config(void)
     menubright->setCurrent(5);
   }
 
-  { //cerr<<"// screen ratio="<<Config::getInstance()->getRatio()<<endl;
+  { cerr<<"// screen ratio="<<Config::getInstance()->getRatio()<<endl;
     int array_size = sizeof( g_RatioArray ) / sizeof( g_RatioArray[0] );
     menuratio->setCurrent(3);
     for (int i=array_size-1; (i>=0) ; i-- ) {
