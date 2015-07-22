@@ -246,7 +246,8 @@ dnl AC_SUBST(pkgincludedir)
 
 AC_CONFIG_FILES([Makefile addon/Makefile base/Makefile data/Makefile
  src/Makefile test/Makefile pinball-config
- data/tux/Makefile data/professor/Makefile data/hurd/Makefile data/gnu/Makefile
+ data/tux/Makefile data/professor/Makefile data/professor2/Makefile
+ data/hurd/Makefile data/gnu/Makefile
 ])
 
 AC_OUTPUT

@@ -1,30 +1,26 @@
 AUTOMAKE_OPTIONS = gnu
 
-highscoredir = $(DESTDIR)/$(EM_BUILD_ROOT)/$(EM_HIGHSCORE_DIR)/professor
+highscoredir = $(DESTDIR)/$(EM_BUILD_ROOT)/$(EM_HIGHSCORE_DIR)/professor2
 
 professorlibdir = $(EM_LIBDIR)
-professordatadir = $(datadir)/pinball/professor
+professordatadir = $(datadir)/pinball/professor2
 
-professorlib_LTLIBRARIES = libModuleProfessor.la
+professorlib_LTLIBRARIES = libModuleProfessor2.la
 
 INCLUDES = -I../../base -I.../../addon -I../../src
 
-libModuleProfessor_la_LDFLAGS = -module
-libModuleProfessor_la_SOURCES = ModuleProfessor.cpp
+libModuleProfessor2_la_LDFLAGS = -module
+libModuleProfessor2_la_SOURCES = ModuleProfessor.cpp
 
 professordata_DATA = \
-bump.wav \
-bumphard.wav \
-bumpsoft.wav \
-flip.wav \
-floor.png \
-floor.png.pcx \
-gameover.wav \
-introp.ogg \
-nudge.wav \
-pinball.pbl \
-professor.ogg \
-professor.png
+ $(wildcard *.pbl) \
+ $(wildcard *.pcx) \
+ $(wildcard *.png) \
+ $(wildcard *.jpg) \
+ $(wildcard *.wav) \
+ $(wildcard *.ogg) \
+ $(wildcard *.mid) \
+ #
 
 # This will create a new empty highscores file
 # NOTE! The user games must exist!
