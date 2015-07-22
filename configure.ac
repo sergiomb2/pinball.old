@@ -1,9 +1,12 @@
 dnl Process this file with autoconf 2.53 to produce a configure script.
 
 dnl init autoconf and automake
-AC_INIT(pinball, 0.3.2, [[pinball.sf.net]])
+AC_INIT(pinball, 0.3.2)
 
 AM_CONFIG_HEADER(pinconfig.h)
+LT_CONFIG_LTDL_DIR([libltdl])
+AC_CONFIG_AUX_DIR([libltdl/config])
+AC_CONFIG_MACRO_DIR([libltdl/m4])
 
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
@@ -11,16 +14,24 @@ AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE
 
 dnl this is a c++ program
-CFLAGS="-g -W -Wall -O2"
-CXXFLAGS="-g -W -Wall -O2"
+dnl CFLAGS="-g -W -Wall -O2"
+dnl CXXFLAGS="-g -W -Wall -O2"
+
+AC_ARG_WITH(cflags,
+[  --with-cflags=CFLAGS            use CFLAGS as compile time arguments.],
+    [CFLAGS=$with_cflags; export CFLAGS])
+
+AC_ARG_WITH(cxxflags,
+[  --with-cxxflags=CXXFLAGS        use CXXFLAGS as compile time arguments.],
+    [CXXFLAGS=$with_cxxflags; export CXXFLAGS])
 
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
 AC_LIBTOOL_DLOPEN
-AC_LIBLTDL_CONVENIENCE
 AC_PROG_LIBTOOL
+LTDL_INIT
 AC_WITH_LTDL
 
 dnl *******************************************
