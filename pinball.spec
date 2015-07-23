@@ -38,6 +38,8 @@ sed -i 's/Exec=pinball/Exec=pinball-wrapper/g' pinball.desktop
 rm -fr $RPM_BUILD_ROOT%{_localstatedir}
 # remove unused test module
 rm $RPM_BUILD_ROOT%{_libdir}/%{name}/libModuleTest.*
+# .la files are needed for ltdl
+rm $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.{a,so}
 # remove bogus development files
 rm $RPM_BUILD_ROOT%{_bindir}/%{name}-config
 rm -r $RPM_BUILD_ROOT%{_includedir}/%{name}
