@@ -7,7 +7,7 @@ bin_PROGRAMS = pinball
 
 pinlib_LIBRARIES = libemilia_pin.a
 
-INCLUDES = -I../base -I../addon
+AM_CPPFLAGS = -I../base -I../addon
 
 pinball_LDADD = ../src/libemilia_pin.a ../addon/libemilia_addon.a ../base/libemilia_base.a -lltdl
 pinball_LDFLAGS = -export-dynamic

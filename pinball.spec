@@ -21,8 +21,6 @@ There is only one level to play with but it is however very addictive.
 
 %prep
 %setup -q
-# cleanup a bit
-chmod -x data/*/Module*.cpp
 autoreconf -fiv
 
 

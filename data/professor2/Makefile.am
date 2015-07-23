@@ -2,17 +2,17 @@ AUTOMAKE_OPTIONS = gnu
 
 highscoredir = $(DESTDIR)/$(EM_BUILD_ROOT)/$(EM_HIGHSCORE_DIR)/professor2
 
-professorlibdir = $(EM_LIBDIR)
-professordatadir = $(datadir)/pinball/professor2
+professor2libdir = $(EM_LIBDIR)
+professor2datadir = $(datadir)/pinball/professor2
 
-professorlib_LTLIBRARIES = libModuleProfessor2.la
+professor2lib_LTLIBRARIES = libModuleProfessor2.la
 
-INCLUDES = -I../../base -I.../../addon -I../../src
+AM_CPPFLAGS = -I../../base -I.../../addon -I../../src
 
 libModuleProfessor2_la_LDFLAGS = -module
 libModuleProfessor2_la_SOURCES = ModuleProfessor.cpp
 
-professordata_DATA = \
+professor2data_DATA = \
  $(wildcard *.pbl) \
  $(wildcard *.pcx) \
  $(wildcard *.png) \
@@ -31,4 +31,4 @@ install-data-hook:
 	-if test `whoami` = root; then chgrp games $(highscoredir)/highscores; fi
 	-chmod 666 $(highscoredir)/highscores
 
-EXTRA_DIST = $(professordata_DATA)
+EXTRA_DIST = $(professor2data_DATA)
