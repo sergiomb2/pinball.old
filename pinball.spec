@@ -21,7 +21,7 @@ There is only one level to play with but it is however very addictive.
 
 %prep
 %setup -q
-autoreconf -fiv
+autoreconf -i
 
 
 %build

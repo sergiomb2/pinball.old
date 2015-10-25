@@ -37,8 +37,6 @@ debian/pinball.postrm.debhelper
 debian/pinball.substvars
 debian/pinball/
 debian/tmp/
-libltdl/*
-libtool
 manpage.links
 manpage.refs
 pinball-config
@@ -78,16 +76,11 @@ addon/Makefile
 addon/Makefile.in
 base/Makefile
 base/Makefile.in
-config.guess
-config.sub
 configure
 data/Makefile.in
 data/professor/Makefile.in
 data/tux/Makefile.in
-install-sh
 libltdl/
-ltmain.sh
-missing
 pinconfig.h
 pinconfig.h.in
 src/Makefile.in

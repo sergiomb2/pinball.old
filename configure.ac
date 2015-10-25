@@ -32,7 +32,6 @@ AC_PROG_INSTALL
 AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 LTDL_INIT
-AC_WITH_LTDL
 
 dnl *******************************************
 dnl PATHS AND DIRS ****************************
