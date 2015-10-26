@@ -4,7 +4,6 @@ dnl init autoconf and automake
 AC_INIT(pinball, 0.3.2)
 
 AM_CONFIG_HEADER(pinconfig.h)
-LT_CONFIG_LTDL_DIR([libltdl])
 AC_CONFIG_AUX_DIR([libltdl/config])
 AC_CONFIG_MACRO_DIR([libltdl/m4])
 
@@ -30,8 +29,13 @@ AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
 AC_LIBTOOL_DLOPEN
+AC_LIBLTDL_CONVENIENCE
 AC_PROG_LIBTOOL
+LT_CONFIG_LTDL_DIR([libltdl])
 LTDL_INIT
+
+AC_SUBST(INCLTDL)
+AC_SUBST(LIBLTDL)
 
 dnl *******************************************
 dnl PATHS AND DIRS ****************************
