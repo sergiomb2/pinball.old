@@ -1,26 +1,25 @@
 Name:           pinball
 Version:        0.3.2
 Release:        1%{?dist}
-Summary:        Emilia arcade game
-Group:          Amusements/Games
+Summary:        Emilia 3D Pinball Game
 License:        GPL+
 URL:            http://pinball.sourceforge.net
-# git archive --prefix="pinball-0.3.2/" --format=tar master | gzip - > ../pinball-0.3.2.tar.gz
-Source0:        http://downloads.sourceforge.net/pinball/%{name}-%{version}.tar.gz
+Source0:        https://github.com/sergiomb2/pinball/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 BuildRequires:  libXt-devel freeglut-devel SDL_image-devel SDL_mixer-devel
 BuildRequires:  libpng-devel libvorbis-devel libtool-ltdl-devel
-BuildRequires:  desktop-file-utils
+BuildRequires:  desktop-file-utils libappstream-glib
 BuildRequires:  autoconf automake libtool
-Requires:       hicolor-icon-theme opengl-games-utils
+Requires:       hicolor-icon-theme opengl-games-utils timidity++-patches
 
 %description
 The Emilia Pinball project is an open source pinball simulator for linux
-and other unix systems. The current release is a stable and mature alpha.
-There is only one level to play with but it is however very addictive.
+and other unix systems. The current release features a number of tables:
+tux, professor, professor2, gnu and hurd and is very addictive.
 
 
 %prep
 %setup -q
+sed -i 's/Exec=pinball/Exec=pinball-wrapper/' pinball.desktop
 autoreconf -i
 
 
@@ -30,12 +29,10 @@ make
 
 
 %install
-make DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p" install
+%make_install INSTALL="install -p"
 ln -s opengl-game-wrapper.sh $RPM_BUILD_ROOT%{_bindir}/%{name}-wrapper
-sed -i 's/Exec=pinball/Exec=pinball-wrapper/g' pinball.desktop
-
 # remove unused global higescorefiles:
-rm -fr $RPM_BUILD_ROOT%{_localstatedir}
+rm -r $RPM_BUILD_ROOT%{_localstatedir}
 # remove unused test module
 rm $RPM_BUILD_ROOT%{_libdir}/%{name}/libModuleTest.*
 # .la files are needed for ltdl
@@ -48,25 +45,27 @@ rm -r $RPM_BUILD_ROOT%{_includedir}/%{name}
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 desktop-file-install \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications \
-  %{name}.desktop
+  pinball.desktop
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/48x48/apps
-install -p -m 644 %{name}.png \
+install -p -m 644 pinball.png \
   $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/48x48/apps
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/pixmaps
-install -p -m 0644 -t %{buildroot}%{_datadir}/pixmaps \
-    data/%{name}.xpm
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
+install -p -m 644 pinball.appdata.xml $RPM_BUILD_ROOT%{_datadir}/appdata
+appstream-util validate-relax --nonet \
+  $RPM_BUILD_ROOT%{_datadir}/appdata/%{name}.appdata.xml
+
 
 %post
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
-fi
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
-touch --no-create %{_datadir}/icons/hicolor || :
-if [ -x %{_bindir}/gtk-update-icon-cache ]; then
-   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
@@ -75,14 +74,23 @@ fi
 %{_bindir}/%{name}*
 %{_libdir}/%{name}
 %{_datadir}/%{name}
+%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/%{name}.png
-%{_datadir}/pixmaps/%{name}.xpm
 
 
 %changelog
-* Wed Jul 22 2015 Sérgio Basto <sergio@serjux.com> - 0.3.2-1
-- Update to github version (https://github.com/sergiomb2/pinball).
+* Mon Oct 26 2015 Hans de Goede <hdegoede@redhat.com> - 0.3.2-1
+- Switch to new github upstream
+- Update to 0.3.2 release
+- Add an appdata file
+- Add Requires: timidity++-patches so that the music works
+
+* Fri Aug 21 2015 Ralf Corsépius <corsepiu@fedoraproject.org> - 0.3.1-27
+- Let configure honor CFLAGS (Add pinball-0.3.1-cflags.patch)
+  (Fix F23FTBS, RHBZ#1239792).
+- Add %%license.
+- Modernize spec.
 
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.1-26
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
