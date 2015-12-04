@@ -5,6 +5,8 @@ set -e
 
 rm -rf libltdl
 
+mkdir -p libltdl/m4
+
 autoreconf -i
 
 echo "Now you may do: ./configure && make "
