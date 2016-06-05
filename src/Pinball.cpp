@@ -69,7 +69,7 @@ float g_RatioArray[]
 = { 1./2. , 1./1.  , 5./4. , 4./3. , 3./2. , 16/10. , 16./9. , 9./5, 2./1., 9/16., 10/16., 4/5.  };
 
 int g_WidthArray[] 
-= { 320, 400, 512, 640, 800 , 864, 1024, 1280 , 1680 , 1920};
+= { 320, 400, 512, 640, 800 , 864, 900, 1024, 1280 , 1680 , 1920};
 
 /****************************************************************************
  * Menus
@@ -636,6 +636,7 @@ MenuItem* createMenus(Engine * engine) {
     menusize->addText(   "screen width:     640");
     menusize->addText(   "screen width:     800");
     menusize->addText(   "screen width:     864");
+    menusize->addText(   "screen width:     900");
     menusize->addText(   "screen width:    1024");
     menusize->addText(   "screen width:    1280");
     menusize->addText(   "screen width:    1680");
