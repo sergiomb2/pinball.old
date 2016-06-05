@@ -100,3 +100,5 @@ conf*/
 
 debian/*.substvars
 debian/*-snapshot/
+
+libtool
