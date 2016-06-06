@@ -68,8 +68,8 @@ void EyeBehavior::onTick() {
     Config::getInstance()->setView(3);
   } else if (Keyboard::isKeyDown(SDLK_F9)) {
     Config::getInstance()->setView(4);
-  } else if (Keyboard::isKeyDown(SDLK_F10)) {
-    Config::getInstance()->setView(5);
+  //} else if (Keyboard::isKeyDown(SDLK_F10)) { //rotated screen 
+  //  Config::getInstance()->setView(5);
   }
 
   // the nudge code is here ----------------
