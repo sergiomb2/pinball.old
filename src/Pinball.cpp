@@ -66,7 +66,7 @@
 void get_config(void);
 
 float g_RatioArray[] 
-= { 1./2. , 1./1.  , 5./4. , 4./3. , 3./2. , 16/10. , 16./9. , 9./5, 2./1., 9/16., 10/16., 4/5.  };
+= { 1./2. , 1./1.  , 5./4. , 4./3. , 3./2. , 16./10. , 16./9. , 9./5, 2./1., 9./16., 10./16., 4./5.  };
 
 int g_WidthArray[] 
 = { 320, 400, 512, 640, 720, 800 , 864, 900, 1024, 1080, 1280 , 1680 , 1920};
@@ -504,8 +504,9 @@ void get_config(void)
 MenuItem* createMenus(Engine * engine) {
   // Create the meny
   MenuSub* menu = new MenuSub("main menu", engine);
-  menu->setBottomText("http://pinball.sourceforge.net");
-
+  //menu->setBottomText("http://pinball.sourceforge.net");
+  menu->setBottomText("http://github.com/kwadroke/pinball");
+	
   MenuSub* menuresume = new MenuSub("play", engine);
   menuresume->setAction(EM_MENU_RESUME);
   menu->addMenuItem(menuresume);
