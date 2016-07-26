@@ -1,10 +1,10 @@
 Name:           pinball
-Version:        0.3.2
+Version:        0.3.3
 Release:        1%{?dist}
 Summary:        Emilia 3D Pinball Game
 License:        GPL+
 URL:            http://pinball.sourceforge.net
-Source0:        https://github.com/sergiomb2/pinball/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:        https://github.com/sergiomb2/pinball/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  libXt-devel freeglut-devel SDL_image-devel SDL_mixer-devel
 BuildRequires:  libpng-devel libvorbis-devel libtool-ltdl-devel
 BuildRequires:  desktop-file-utils libappstream-glib
@@ -20,11 +20,11 @@ tux, professor, professor2, gnu and hurd and is very addictive.
 %prep
 %setup -q
 sed -i 's/Exec=pinball/Exec=pinball-wrapper/' pinball.desktop
-autoreconf -i
+./bootstrap
 
 
 %build
-%configure --without-included-ltdl --disable-static
+%configure --disable-static
 make
 
 
@@ -80,6 +80,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Jul 26 2016 Sérgio Basto <sergio@serjux.com> - 0.3.3-1
+- Update to 0.3.3
+
 * Mon Oct 26 2015 Hans de Goede <hdegoede@redhat.com> - 0.3.2-1
 - Switch to new github upstream
 - Update to 0.3.2 release
