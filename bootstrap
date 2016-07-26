@@ -3,9 +3,10 @@
 set -e
 #set -x
 
-rm -rf libltdl
+rm -rf libltdl/ m4/ config/
 
-mkdir -p libltdl/m4
+#avoid warning
+mkdir -p m4
 
 autoreconf -i
 

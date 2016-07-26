@@ -43,10 +43,10 @@ sdl-devel.x.x.x.rpm. Then install with the usual:
 Did you remember to install the development packages of SDL? Did you remember
 to install also SDL_Image and SDL_Mixer?
 
-autoreconf -i
+./bootstrap
 ./configure
 make
-make install (as root user)
+make install (as root ) or src/pinball
 make clean (if you want to save some disc space)
 
 The game is started with 'pinball'.

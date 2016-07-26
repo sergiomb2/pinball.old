@@ -80,7 +80,9 @@ configure
 data/Makefile.in
 data/professor/Makefile.in
 data/tux/Makefile.in
+config/
 libltdl/
+m4/
 pinconfig.h
 pinconfig.h.in
 src/Makefile.in
@@ -96,7 +98,6 @@ conftest
 conftest.c
 conftest.err
 conftest.cpp
-conf*/
 
 debian/*.substvars
 debian/*-snapshot/

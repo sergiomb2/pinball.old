@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = gnu
 
-ACLOCAL_AMFLAGS = -I libltdl/m4
+ACLOCAL_AMFLAGS = -I m4
 
 SUBDIRS =  libltdl addon base data src test
 
