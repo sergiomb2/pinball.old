@@ -49,6 +49,10 @@ make
 make install (as root ) or src/pinball
 make clean (if you want to save some disc space)
 
+Note: 
+Multithread make fails 
+make -j3 still fail to build 
+
 The game is started with 'pinball'.
 
 Default Keys
