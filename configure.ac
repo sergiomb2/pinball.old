@@ -1,9 +1,10 @@
 dnl Process this file with autoconf 2.53 to produce a configure script.
 
 dnl init autoconf and automake
-AC_INIT(pinball, 0.3.2)
+AC_INIT(pinball, 0.3.3.1)
 
 AM_CONFIG_HEADER(pinconfig.h)
+LT_CONFIG_LTDL_DIR([libltdl])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIRS([m4])
 
@@ -28,14 +29,9 @@ dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
 AC_PROG_INSTALL
-AC_LIBTOOL_DLOPEN
-LT_CONFIG_LTDL_DIR([libltdl])
-AC_LIBLTDL_CONVENIENCE
 AC_PROG_LIBTOOL
+AC_LIBTOOL_DLOPEN
 LTDL_INIT
-
-AC_SUBST(INCLTDL)
-AC_SUBST(LIBLTDL)
 
 dnl *******************************************
 dnl PATHS AND DIRS ****************************
