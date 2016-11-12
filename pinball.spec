@@ -1,8 +1,11 @@
 Name:           pinball
-Version:        0.3.3
+Version:        0.3.3.1
 Release:        1%{?dist}
 Summary:        Emilia 3D Pinball Game
-License:        GPL+
+# core license is GPL+
+# gnu table licenses are (GFDL or Free Art or CC-BY-SA) and GPLv3 and CC-BY-SA
+# hurd table license is GPLv2+
+License: GPL+ and (GFDL or Free Art or CC-BY-SA) and GPLv3 and CC-BY-SA and GPLv2+
 URL:            http://pinball.sourceforge.net
 Source0:        https://github.com/sergiomb2/pinball/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:  libXt-devel freeglut-devel SDL_image-devel SDL_mixer-devel
@@ -16,6 +19,14 @@ The Emilia Pinball project is an open source pinball simulator for linux
 and other unix systems. The current release features a number of tables:
 tux, professor, professor2, gnu and hurd and is very addictive.
 
+%package devel
+Summary:    Development files for %{name}
+Requires:   %{name}%{?_isa} = %{version}-%{release}
+
+%description devel
+This package contains files for development with %{name}.
+May be used in pinball-pinedit.
+
 
 %prep
 %setup -q
@@ -25,7 +36,7 @@ sed -i 's/Exec=pinball/Exec=pinball-wrapper/' pinball.desktop
 
 %build
 %configure --disable-static
-make
+%make_build
 
 
 %install
@@ -34,17 +45,17 @@ ln -s opengl-game-wrapper.sh $RPM_BUILD_ROOT%{_bindir}/%{name}-wrapper
 # remove unused global higescorefiles:
 rm -r $RPM_BUILD_ROOT%{_localstatedir}
 # remove unused test module
-rm $RPM_BUILD_ROOT%{_libdir}/%{name}/libModuleTest.*
+#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/libModuleTest.*
 # .la files are needed for ltdl
-rm $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.{a,so}
+rm $RPM_BUILD_ROOT%{_libdir}/%{name}/lib*.a
 # remove bogus development files
-rm $RPM_BUILD_ROOT%{_bindir}/%{name}-config
-rm -r $RPM_BUILD_ROOT%{_includedir}/%{name}
+#rm $RPM_BUILD_ROOT%{_bindir}/%{name}-config
+#rm -r $RPM_BUILD_ROOT%{_includedir}/%{name}
 
 # below is the desktop file and icon stuff.
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-desktop-file-install \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+desktop-file-install --dir $RPM_BUILD_ROOT%{_datadir}/applications \
+  --set-key='Keywords' --set-value='Game;Arcade;Pinball;' \
   pinball.desktop
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/48x48/apps
 install -p -m 644 pinball.png \
@@ -71,17 +82,37 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %files
 %doc README ChangeLog
 %license COPYING
-%{_bindir}/%{name}*
-%{_libdir}/%{name}
+%{_bindir}/%{name}
+%{_bindir}/%{name}-wrapper
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/*so.*
+%{_libdir}/%{name}/*la
 %{_datadir}/%{name}
 %{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/%{name}.png
 
+%files devel
+%{_bindir}/%{name}-config
+%{_libdir}/%{name}/*.so
+%{_includedir}/%{name}
+
 
 %changelog
+* Sat Nov 12 2016 Sérgio Basto <sergio@serjux.com> - 0.3.3.1-1
+- Test pinball-0.3.3.1
+
 * Tue Jul 26 2016 Sérgio Basto <sergio@serjux.com> - 0.3.3-1
 - Update to 0.3.3
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.3.2-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Sat Jan  9 2016 Hans de Goede <hdegoede@redhat.com> - 0.3.2-3
+- Add Keywords field to desktop file
+
+* Mon Dec 14 2015 Jon Ciesla <limburgher@gmail.com> - 0.3.2-2
+- Fix license tag, BZ 1290935.
 
 * Mon Oct 26 2015 Hans de Goede <hdegoede@redhat.com> - 0.3.2-1
 - Switch to new github upstream

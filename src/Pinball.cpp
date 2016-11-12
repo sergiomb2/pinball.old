@@ -504,8 +504,7 @@ void get_config(void)
 MenuItem* createMenus(Engine * engine) {
   // Create the meny
   MenuSub* menu = new MenuSub("main menu", engine);
-  //menu->setBottomText("http://pinball.sourceforge.net");
-  menu->setBottomText("http://github.com/kwadroke/pinball");
+  menu->setBottomText("http://pinball.sourceforge.net");
 	
   MenuSub* menuresume = new MenuSub("play", engine);
   menuresume->setAction(EM_MENU_RESUME);
