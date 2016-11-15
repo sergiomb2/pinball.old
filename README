@@ -16,7 +16,8 @@ Hardware rendering:
 Recommended:
   450 Mhz PIII.
   Decent graphics card, voodoo3, tnt2, geforce, matrox g450 (you 
-    do not need anything superfast), just need 3D support.
+    do not need anything superfast), just need be capable of hardware 
+    accelerated 3D.
   Latest SDL libaries, old libraries may have bugs.
 
 Installing and building
@@ -50,8 +51,7 @@ make install (as root ) or src/pinball
 make clean (if you want to save some disc space)
 
 Note: 
-Multithread make fails 
-make -j3 still fail to build 
+Multithread make ( make -j3 ) fixed in version 0.3.3.1
 
 The game is started with 'pinball'.
 
