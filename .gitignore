@@ -37,6 +37,7 @@ debian/pinball.postrm.debhelper
 debian/pinball.substvars
 debian/pinball/
 debian/tmp/
+libtool
 manpage.links
 manpage.refs
 pinball-config
@@ -102,4 +103,3 @@ conftest.cpp
 debian/*.substvars
 debian/*-snapshot/
 
-libtool
