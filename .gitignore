@@ -99,6 +99,7 @@ conftest
 conftest.c
 conftest.err
 conftest.cpp
+INSTALL
 
 debian/*.substvars
 debian/*-snapshot/
