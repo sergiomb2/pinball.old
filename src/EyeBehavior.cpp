@@ -68,8 +68,8 @@ void EyeBehavior::onTick() {
     Config::getInstance()->setView(3);
   } else if (Keyboard::isKeyDown(SDLK_F9)) {
     Config::getInstance()->setView(4);
-  //} else if (Keyboard::isKeyDown(SDLK_F10)) { //rotated screen 
-  //  Config::getInstance()->setView(5);
+  } else if (Keyboard::isKeyDown(SDLK_F10)) { //rotated screen 
+    Config::getInstance()->setView(5);
   }
 
   // the nudge code is here ----------------
@@ -216,9 +216,7 @@ void EyeBehavior::onTick() {
     dy = (TY4) - cy; //Zoom
     dz = (TZ4+m_fZNudge) - cz;  //Top  to Bottom
     this->getParent()->addTranslation(dx*DIFF_FACTOR, dy*DIFF_FACTOR, dz*DIFF_FACTOR);
-    
-    this->getParent()->setRotation(RX4, RY4, RZ4); //Rotation - None
-    this->getParent()->setScale(0.4f,1.0f,1.0f);
+    this->getParent()->setRotation(RX4, RY4, RZ4);
     break;
   case 5: // top-down-rotated - for virtual pinball tables
     // get diff between position we want to move to and current pos

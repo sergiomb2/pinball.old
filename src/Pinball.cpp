@@ -296,7 +296,7 @@ protected:
     case 2: config->setView(2); break;
     case 3: config->setView(3); break;
     case 4: config->setView(4); break;
-    //case 5: config->setView(5); break;
+    case 5: config->setView(5); break;
     default: config->setView(0);
     }
     // texture filter
@@ -469,7 +469,7 @@ void get_config(void)
   case 2: menuview->setCurrent(2); break;
   case 3: menuview->setCurrent(3); break;
   case 4: menuview->setCurrent(4); break;
-  //case 5: menuview->setCurrent(5); break;
+  case 5: menuview->setCurrent(5); break;
   default: menuview->setCurrent(0);
   }
   // texture filter
@@ -532,7 +532,7 @@ MenuItem* createMenus(Engine * engine) {
   menucfg->addMenuItem(menuaudio);
 
   MenuSub* menukey = new MenuSub("keyboard", engine);
-  menukey->setBottomText("shortcuts for view change F5-F9");
+  menukey->setBottomText("shortcuts for view change F5-F10");
   menucfg->addMenuItem(menukey);
 
   string filename = string(Config::getInstance()->getDataSubDir()) + "/splash.png";
@@ -617,7 +617,7 @@ MenuItem* createMenus(Engine * engine) {
   menuview->addText(  "view:          moving");
   menuview->addText(  "view:             top");
   menuview->addText(  "view:        top-down");
-  //menuview->addText(  "view: top-down-rotated");
+  menuview->addText(  "view: top-down-rotated");
   menugfx->addMenuItem(menuview);
 
   menuscreen = new MenuChoose(engine);

@@ -803,8 +803,7 @@ Group * Loader::loadStdObject(ifstream & file, istringstream & ist, Engine * eng
     this->readNextToken(file, ist, sy);	
     this->readNextToken(file, ist, sz);
   } else { // below 0.3.0
-    //sx = 1.0f;
-    sx = 2.0f;
+    sx = 1.0f;
     sy = 1.0f;
     sz = 1.0f;
   }
