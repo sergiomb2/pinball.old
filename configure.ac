@@ -1,9 +1,9 @@
-dnl Process this file with autoconf 2.53 to produce a configure script.
-
+dnl #                                               -*- Autoconf -*-
+dnl # Process this file with autoconf 2.53 to produce a configure script.
 dnl init autoconf and automake
 AC_INIT(pinball, 0.3.3.1)
 
-AM_CONFIG_HEADER(pinconfig.h)
+AC_CONFIG_HEADERS(pinconfig.h)
 LT_CONFIG_LTDL_DIR([libltdl])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIRS([m4])
@@ -12,6 +12,13 @@ AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
 AM_INIT_AUTOMAKE
+
+dnl # Checks for programs.
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_LIBTOOL
+
 
 dnl this is a c++ program
 dnl CFLAGS="-g -W -Wall -O2"
@@ -25,11 +32,6 @@ AC_ARG_WITH(cxxflags,
 [  --with-cxxflags=CXXFLAGS        use CXXFLAGS as compile time arguments.],
     [CXXFLAGS=$with_cxxflags; export CXXFLAGS])
 
-dnl Checks for programs.
-AC_PROG_CC
-AC_PROG_CXX
-AC_PROG_INSTALL
-AC_PROG_LIBTOOL
 AC_LIBTOOL_DLOPEN
 LTDL_INIT
 
@@ -78,6 +80,19 @@ dnl EM_HIGHSCORE_DIR="/var/games/pinball"
 AC_SUBST(EM_HIGHSCORE_DIR)
 eval EM_HIGHSCORE_PATH=`eval echo "$EM_HIGHSCORE_DIR"`
 AC_DEFINE_UNQUOTED(EM_HIGHSCORE_DIR, "$EM_HIGHSCORE_PATH", [Highscore directory])
+
+AC_ARG_WITH(localization-prefix, [  --with-localization-prefix=PFX    Install localization files in PFX (/usr/share/locale)], localization_prefix="$withval", localization_prefix="")
+
+if test x"$localization_prefix" != "x"; then
+    EM_LOCALIZATION_DIR=$localization_prefix
+else
+    EM_LOCALIZATION_DIR="/usr/share/locale"
+fi
+
+dnl EM_LOCALIZATION_DIR="/usr/share/locale"
+AC_SUBST(EM_LOCALIZATION_DIR)
+eval EM_LOCALIZATION_PATH=`eval echo "$EM_LOCALIZATION_DIR"`
+AC_DEFINE_UNQUOTED(EM_LOCALIZATION_DIR, "$EM_LOCALIZATION_PATH", [Localization directory])
 
 
 AC_ARG_ENABLE(libtest, [  --disable-libtest     SDL_image _mixer libtest work around ], , enable_libtest=yes)
