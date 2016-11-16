@@ -68,7 +68,7 @@
 void get_config(void);
 
 float g_RatioArray[] 
-= { 1./2. , 1./1.  , 5./4. , 4./3. , 3./2. , 16./10. , 16./9. , 9./5, 2./1., 9./16., 10./16., 4./5.  };
+= { 1./2. , 5./9. , 9./16. , 10./16. , 2./3. , 3./4. , 4./5. , 1./1. , 5./4. , 4./3. , 3./2. , 16./10. , 16./9. , 9./5., 2./1. };
 
 int g_WidthArray[] 
 = { 320, 400, 512, 640, 720, 800 , 864, 900, 1024, 1080, 1280 , 1680 , 1920};
@@ -652,6 +652,12 @@ MenuItem* createMenus(Engine * engine) {
   {
     menuratio = new MenuChoose(engine);
     menuratio->addText(gettext("ratio:      0.5 (1/2)"));
+    menuratio->addText( "ratio:  0.55 (5/9)");
+    menuratio->addText( "ratio:  0.56 (9/16)");
+    menuratio->addText( "ratio:  0.62 (10/16)");
+    menuratio->addText( "ratio:  0.66 (2/3)");
+    menuratio->addText( "ratio:  0.75 (3/4)");
+    menuratio->addText( "ratio:  0.8 (4/5)");
     menuratio->addText(gettext("ratio:        1 (1/1)"));
     menuratio->addText(gettext("ratio:      1.2 (5/4)"));
     menuratio->addText(gettext("ratio:      1.3 (4/3)"));
@@ -660,8 +666,6 @@ MenuItem* createMenus(Engine * engine) {
     menuratio->addText(gettext("ratio:     1.7 (16/9)"));
     menuratio->addText(gettext("ratio:      1.8 (9/5)"));
     menuratio->addText(gettext("ratio:        2 (2/1)"));
-    menuratio->addText( "ratio:  0.5625 (9/16)");
-    menuratio->addText( "ratio:  0.625 (10/16)");
     menugfx->addMenuItem(menuratio);
   }
 

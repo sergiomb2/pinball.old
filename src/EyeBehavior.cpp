@@ -217,6 +217,7 @@ void EyeBehavior::onTick() {
     dz = (TZ4+m_fZNudge) - cz;  //Top  to Bottom
     this->getParent()->addTranslation(dx*DIFF_FACTOR, dy*DIFF_FACTOR, dz*DIFF_FACTOR);
     this->getParent()->setRotation(RX4, RY4, RZ4);
+    //this->getParent()->setScale(0.4f,1.0f,1.0f);
     break;
   case 5: // top-down-rotated - for virtual pinball tables
     // get diff between position we want to move to and current pos
